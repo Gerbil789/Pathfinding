@@ -1,0 +1,1315 @@
+fileFormatVersion: 2
+guid: c5377b7e6a7400948b0cf8d9451ee430
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2827286597049699197
+    second: PrototypeTiles 64x64 (1)_0
+  - first:
+      213: 357341420244315370
+    second: PrototypeTiles 64x64 (1)_1
+  - first:
+      213: 1014196261509719577
+    second: PrototypeTiles 64x64 (1)_2
+  - first:
+      213: 6153968031694259907
+    second: PrototypeTiles 64x64 (1)_3
+  - first:
+      213: 3045547893094955519
+    second: PrototypeTiles 64x64 (1)_4
+  - first:
+      213: -5118803133334047159
+    second: PrototypeTiles 64x64 (1)_5
+  - first:
+      213: -4863161978456496624
+    second: PrototypeTiles 64x64 (1)_6
+  - first:
+      213: -1294747640298625403
+    second: PrototypeTiles 64x64 (1)_7
+  - first:
+      213: -4713769257457310281
+    second: PrototypeTiles 64x64 (1)_8
+  - first:
+      213: 6113806536290950811
+    second: PrototypeTiles 64x64 (1)_9
+  - first:
+      213: -2771161652143864419
+    second: PrototypeTiles 64x64 (1)_10
+  - first:
+      213: 54623145233414386
+    second: PrototypeTiles 64x64 (1)_11
+  - first:
+      213: -6992192418542631954
+    second: PrototypeTiles 64x64 (1)_12
+  - first:
+      213: 663086458120272021
+    second: PrototypeTiles 64x64 (1)_13
+  - first:
+      213: 5292807920232884317
+    second: PrototypeTiles 64x64 (1)_14
+  - first:
+      213: -8798771502153863554
+    second: PrototypeTiles 64x64 (1)_15
+  - first:
+      213: -4704490115544532449
+    second: PrototypeTiles 64x64 (1)_16
+  - first:
+      213: -2494477240202564447
+    second: PrototypeTiles 64x64 (1)_17
+  - first:
+      213: 2151041462649078601
+    second: PrototypeTiles 64x64 (1)_18
+  - first:
+      213: 4509368427081940942
+    second: PrototypeTiles 64x64 (1)_19
+  - first:
+      213: 6584635339393674237
+    second: PrototypeTiles 64x64 (1)_20
+  - first:
+      213: 1864739614990152756
+    second: PrototypeTiles 64x64 (1)_21
+  - first:
+      213: -7048742161375987443
+    second: PrototypeTiles 64x64 (1)_22
+  - first:
+      213: -6933668743907515246
+    second: PrototypeTiles 64x64 (1)_23
+  - first:
+      213: 487964873665371278
+    second: PrototypeTiles 64x64 (1)_24
+  - first:
+      213: -8782089844530692752
+    second: PrototypeTiles 64x64 (1)_25
+  - first:
+      213: -6749230497523491123
+    second: PrototypeTiles 64x64 (1)_26
+  - first:
+      213: -444255111152768350
+    second: PrototypeTiles 64x64 (1)_27
+  - first:
+      213: 947064465474085025
+    second: PrototypeTiles 64x64 (1)_28
+  - first:
+      213: 8468473934298631024
+    second: PrototypeTiles 64x64 (1)_29
+  - first:
+      213: -2120996500625007761
+    second: PrototypeTiles 64x64 (1)_30
+  - first:
+      213: -2498489510698893924
+    second: PrototypeTiles 64x64 (1)_31
+  - first:
+      213: -8648361023707211675
+    second: PrototypeTiles 64x64 (1)_32
+  - first:
+      213: 7329858220713300094
+    second: PrototypeTiles 64x64 (1)_33
+  - first:
+      213: -5653155761630390475
+    second: PrototypeTiles 64x64 (1)_34
+  - first:
+      213: 911670001775040888
+    second: PrototypeTiles 64x64 (1)_35
+  - first:
+      213: -4400359658100308498
+    second: PrototypeTiles 64x64 (1)_36
+  - first:
+      213: 3881571955148089127
+    second: PrototypeTiles 64x64 (1)_37
+  - first:
+      213: -7286887425712269158
+    second: PrototypeTiles 64x64 (1)_38
+  - first:
+      213: 1510870646790179842
+    second: PrototypeTiles 64x64 (1)_39
+  - first:
+      213: -6033708329854696491
+    second: PrototypeTiles 64x64 (1)_40
+  - first:
+      213: -4644239173084049977
+    second: PrototypeTiles 64x64 (1)_41
+  - first:
+      213: 2730353861174912626
+    second: PrototypeTiles 64x64 (1)_42
+  - first:
+      213: -6823969855657214225
+    second: PrototypeTiles 64x64 (1)_43
+  - first:
+      213: 5048192306306063948
+    second: PrototypeTiles 64x64 (1)_44
+  - first:
+      213: -7114937387226277203
+    second: PrototypeTiles 64x64 (1)_45
+  - first:
+      213: -5246072796469191702
+    second: PrototypeTiles 64x64 (1)_46
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38431a0d1d573c8d0800000000000000
+      internalID: -2827286597049699197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec2231e02885f400800000000000000
+      internalID: 357341420244315370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 916e0db5026231e00800000000000000
+      internalID: 1014196261509719577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c60f38d159476550800000000000000
+      internalID: 6153968031694259907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff93d5a3ca5f34a20800000000000000
+      internalID: 3045547893094955519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 946b77abbab56f8b0800000000000000
+      internalID: -5118803133334047159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0162aec52f3928cb0800000000000000
+      internalID: -4863161978456496624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 586a93a81e1280ee0800000000000000
+      internalID: -1294747640298625403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b5a910c5d3559eb0800000000000000
+      internalID: -4713769257457310281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9e551507aa98d450800000000000000
+      internalID: 6113806536290950811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_10
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d95c7ccd82bda89d0800000000000000
+      internalID: -2771161652143864419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_11
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f8f620167f02c000800000000000000
+      internalID: 54623145233414386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_12
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee34693aa0eb6fe90800000000000000
+      internalID: -6992192418542631954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59871a7de91c33900800000000000000
+      internalID: 663086458120272021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d58eaddc2c4d37940800000000000000
+      internalID: 5292807920232884317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_15
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7ee94acfeb74e580800000000000000
+      internalID: -8798771502153863554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ab1a55a2b46beb0800000000000000
+      internalID: -4704490115544532449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_17
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aced659a26d16dd0800000000000000
+      internalID: -2494477240202564447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_18
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943c55640d80add10800000000000000
+      internalID: 2151041462649078601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecfb49951be749e30800000000000000
+      internalID: 4509368427081940942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_20
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfb2b0c44f2516b50800000000000000
+      internalID: 6584635339393674237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 434361eccc2e0e910800000000000000
+      internalID: 1864739614990152756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_22
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d097ddd9956dd2e90800000000000000
+      internalID: -7048742161375987443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_23
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294e9297309a6cf90800000000000000
+      internalID: -6933668743907515246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_24
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8c51bd977995c600800000000000000
+      internalID: 487964873665371278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_25
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07dbe2fd0dfbf1680800000000000000
+      internalID: -8782089844530692752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_26
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dce11e71f9ae552a0800000000000000
+      internalID: -6749230497523491123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_27
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aa66168450b5d9f0800000000000000
+      internalID: -444255111152768350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a06af31d16a42d00800000000000000
+      internalID: 947064465474085025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_29
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07b4683ec20168570800000000000000
+      internalID: 8468473934298631024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_30
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6b56629be4b092e0800000000000000
+      internalID: -2120996500625007761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_31
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9db0cf0705935dd0800000000000000
+      internalID: -2498489510698893924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_32
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 568199c4879daf780800000000000000
+      internalID: -8648361023707211675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_33
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e70d79b6733e8b560800000000000000
+      internalID: 7329858220713300094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_34
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 537511859c4fb81b0800000000000000
+      internalID: -5653155761630390475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8795e205907e6ac00800000000000000
+      internalID: 911670001775040888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_36
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5c8fe7438cee2c0800000000000000
+      internalID: -4400359658100308498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_37
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72768b4b02d1ed530800000000000000
+      internalID: 3881571955148089127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_38
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a98d8207e76cfda90800000000000000
+      internalID: -7286887425712269158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_39
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c4e7b29d0b7f410800000000000000
+      internalID: 1510870646790179842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_40
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d302b0fd36f34ca0800000000000000
+      internalID: -6033708329854696491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_41
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cd0f5c04195c8fb0800000000000000
+      internalID: -4644239173084049977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2766276ee5a24e520800000000000000
+      internalID: 2730353861174912626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_43
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feef39b32936c41a0800000000000000
+      internalID: -6823969855657214225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_44
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e9b37f728ce0640800000000000000
+      internalID: 5048192306306063948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_45
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daa5b33942aa24d90800000000000000
+      internalID: -7114937387226277203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PrototypeTiles 64x64 (1)_46
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeb1d9426943237b0800000000000000
+      internalID: -5246072796469191702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      PrototypeTiles 64x64 (1)_0: -2827286597049699197
+      PrototypeTiles 64x64 (1)_1: 357341420244315370
+      PrototypeTiles 64x64 (1)_10: -2771161652143864419
+      PrototypeTiles 64x64 (1)_11: 54623145233414386
+      PrototypeTiles 64x64 (1)_12: -6992192418542631954
+      PrototypeTiles 64x64 (1)_13: 663086458120272021
+      PrototypeTiles 64x64 (1)_14: 5292807920232884317
+      PrototypeTiles 64x64 (1)_15: -8798771502153863554
+      PrototypeTiles 64x64 (1)_16: -4704490115544532449
+      PrototypeTiles 64x64 (1)_17: -2494477240202564447
+      PrototypeTiles 64x64 (1)_18: 2151041462649078601
+      PrototypeTiles 64x64 (1)_19: 4509368427081940942
+      PrototypeTiles 64x64 (1)_2: 1014196261509719577
+      PrototypeTiles 64x64 (1)_20: 6584635339393674237
+      PrototypeTiles 64x64 (1)_21: 1864739614990152756
+      PrototypeTiles 64x64 (1)_22: -7048742161375987443
+      PrototypeTiles 64x64 (1)_23: -6933668743907515246
+      PrototypeTiles 64x64 (1)_24: 487964873665371278
+      PrototypeTiles 64x64 (1)_25: -8782089844530692752
+      PrototypeTiles 64x64 (1)_26: -6749230497523491123
+      PrototypeTiles 64x64 (1)_27: -444255111152768350
+      PrototypeTiles 64x64 (1)_28: 947064465474085025
+      PrototypeTiles 64x64 (1)_29: 8468473934298631024
+      PrototypeTiles 64x64 (1)_3: 6153968031694259907
+      PrototypeTiles 64x64 (1)_30: -2120996500625007761
+      PrototypeTiles 64x64 (1)_31: -2498489510698893924
+      PrototypeTiles 64x64 (1)_32: -8648361023707211675
+      PrototypeTiles 64x64 (1)_33: 7329858220713300094
+      PrototypeTiles 64x64 (1)_34: -5653155761630390475
+      PrototypeTiles 64x64 (1)_35: 911670001775040888
+      PrototypeTiles 64x64 (1)_36: -4400359658100308498
+      PrototypeTiles 64x64 (1)_37: 3881571955148089127
+      PrototypeTiles 64x64 (1)_38: -7286887425712269158
+      PrototypeTiles 64x64 (1)_39: 1510870646790179842
+      PrototypeTiles 64x64 (1)_4: 3045547893094955519
+      PrototypeTiles 64x64 (1)_40: -6033708329854696491
+      PrototypeTiles 64x64 (1)_41: -4644239173084049977
+      PrototypeTiles 64x64 (1)_42: 2730353861174912626
+      PrototypeTiles 64x64 (1)_43: -6823969855657214225
+      PrototypeTiles 64x64 (1)_44: 5048192306306063948
+      PrototypeTiles 64x64 (1)_45: -7114937387226277203
+      PrototypeTiles 64x64 (1)_46: -5246072796469191702
+      PrototypeTiles 64x64 (1)_5: -5118803133334047159
+      PrototypeTiles 64x64 (1)_6: -4863161978456496624
+      PrototypeTiles 64x64 (1)_7: -1294747640298625403
+      PrototypeTiles 64x64 (1)_8: -4713769257457310281
+      PrototypeTiles 64x64 (1)_9: 6113806536290950811
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
