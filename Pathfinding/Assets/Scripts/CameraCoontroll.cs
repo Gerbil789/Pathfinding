@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraCoontroll : MonoBehaviour
 {
     Camera cam;
-    MapGenerator map;
     [Range(1, 10)] [SerializeField] int zoomSensitivity = 5;
     [Range(10, 50)] [SerializeField] int speed = 25;
 
@@ -17,7 +16,6 @@ public class CameraCoontroll : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        map = FindObjectOfType<MapGenerator>();
     }
 
     void Update()
@@ -92,8 +90,8 @@ public class CameraCoontroll : MonoBehaviour
 
     void ClampCamPos()
     {
-        float newX = Mathf.Clamp(transform.position.x, 0f, map.mapSize.x);
-        float newY = Mathf.Clamp(transform.position.y, 0f, map.mapSize.y);
+        float newX = Mathf.Clamp(transform.position.x, 0f, MapManager.MapSize.x);
+        float newY = Mathf.Clamp(transform.position.y, 0f, MapManager.MapSize.y);
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 5, 20);
         cam.transform.position = new Vector3(newX, newY, cam.transform.position.z);
     }
