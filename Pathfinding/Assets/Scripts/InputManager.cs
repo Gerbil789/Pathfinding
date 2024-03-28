@@ -1,5 +1,6 @@
+using System;
+using System.Diagnostics;
 using UnityEngine;
-
 
 public enum Algorithm { ASTAR, ASTAR_PARALLEL }
 
@@ -53,6 +54,8 @@ public class InputManager : MonoBehaviour
 
             var path = Astar.GetPath(playerPos, clickPos, MapManager.Map);
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             switch (algorithm)
             {
@@ -63,8 +66,10 @@ public class InputManager : MonoBehaviour
                     path = ParallelAstar.GetPath(playerPos, clickPos, MapManager.Map);
                     break;
             }
-
-            if(path != null)
+            stopwatch.Stop();
+            TimeSpan elapsedTime = stopwatch.Elapsed;
+            UnityEngine.Debug.Log("Time taken to calculate path: " + elapsedTime.TotalMilliseconds + " milliseconds");
+            if (path != null)
             {
                 playerMovement.SetPath(path);
             }
