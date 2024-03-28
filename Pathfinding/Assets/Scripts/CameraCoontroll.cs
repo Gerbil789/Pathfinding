@@ -6,7 +6,11 @@ public class CameraCoontroll : MonoBehaviour
 {
     Camera cam;
     [Range(1, 10)] [SerializeField] int zoomSensitivity = 5;
-    [Range(10, 50)] [SerializeField] int speed = 25;
+
+    [Range(5, 50)][SerializeField] int minZoom = 5;
+    [Range(5, 50)][SerializeField] int maxZoom = 25;
+
+    [Range(10, 50)][SerializeField] int speed = 25;
 
     [SerializeField] GameObject player;
     public bool lockCamera = false;
@@ -92,7 +96,7 @@ public class CameraCoontroll : MonoBehaviour
     {
         float newX = Mathf.Clamp(transform.position.x, 0f, MapManager.MapSize.x);
         float newY = Mathf.Clamp(transform.position.y, 0f, MapManager.MapSize.y);
-        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, 5, 20);
+        cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
         cam.transform.position = new Vector3(newX, newY, cam.transform.position.z);
     }
 }

@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 160630622}
   - component: {fileID: 160630625}
   - component: {fileID: 160630624}
+  - component: {fileID: 160630626}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -313,8 +314,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5175bdd67a7930643878a063d28cbc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: {x: 64, y: 64}
-  seed: 0
+  mapSize: {x: 128, y: 128}
+  seed: 7
+  scale: 16
+  amplitude: 0.4
   currentTileType: 0
   tileMap: {fileID: 1145850409}
   tiles:
@@ -339,6 +342,20 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &160630626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 160630621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1140c73d6d33d14587a529f91c04c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1751671077}
+  tile: {fileID: 11400000, guid: 34b09135e44445a45b76fdeb0fa9901e, type: 2}
 --- !u!1 &251035707
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b82e625f3bf8b849ae761c939401902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
+  movementSpeed: 100
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSensitivity: 5
+  minZoom: 5
+  maxZoom: 50
   speed: 25
   player: {fileID: 971174854}
   lockCamera: 1
@@ -1356,7 +1375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1839735485 &1751671077
 Tilemap:
   m_ObjectHideFlags: 0

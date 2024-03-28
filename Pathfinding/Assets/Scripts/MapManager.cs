@@ -18,6 +18,8 @@ public class MapManager : MonoBehaviour
 
     public Vector2Int mapSize = new Vector2Int(64, 64);
     public int seed;
+    public float scale = 4f;
+    public float amplitude = 0.5f;
 
     [SerializeField] TileType currentTileType;
 
@@ -29,7 +31,7 @@ public class MapManager : MonoBehaviour
     {
         MapSize = mapSize;
         //seed = PlayerPrefs.GetInt("seed");
-        Map = MapGenerator.Generate(MapSize.x, MapSize.y, 4f, seed);
+        Map = MapGenerator.Generate(MapSize.x, MapSize.y, scale, amplitude, seed);
 
         DrawMap(Map, tileMap);
     }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using Unity.VisualScripting;
 public static class Astar 
 {
     private static Vector3Int start, end;
@@ -9,33 +10,52 @@ public static class Astar
     private static HashSet<Node> openList, closedList;
     private static bool[,] map;
     private static Dictionary<Vector3Int, Node> allNodes;
-    public static Stack<Vector3Int> GetPath(Vector3Int _start, Vector3Int _end, bool[,] _map)
+
+    
+
+    public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end, bool[,] map)
     {
         try
         {
-            if (_map[_start.x, _start.y] == false)
+            if (map[start.x, start.y] == false)
             {
                 Debug.LogWarning("Invalid start position");
                 return null;
             }
 
-            if (_map[_end.x, _end.y] == false)
+            if (map[end.x, end.y] == false)
             {
                 Debug.LogWarning("Invalid end position");
                 return null;
             }
 
             //initialize
-            start = _start;
-            end = _end;
-            map = _map;
+            Astar.start = start;
+            Astar.end = end;
+            Astar.map = map;
             path = null;
             openList = new();
             closedList = new();
             allNodes = new();
 
+            AlgorithmVisualizer.Instance.Clear();
+
             //run algorithm
             Algorithm();
+
+            foreach (var node in allNodes.Values)
+            {
+                AlgorithmVisualizer.Instance.SetTile(node.position, Color.white);
+            }
+
+            if (path != null)
+            {
+                foreach(var pos in path)
+                {
+                    AlgorithmVisualizer.Instance.SetTile(pos, Color.blue);
+                }
+                
+            }
 
             return path;
         }

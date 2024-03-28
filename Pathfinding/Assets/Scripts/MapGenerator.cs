@@ -3,7 +3,7 @@ using UnityEngine;
 public static class MapGenerator
 {
     //true = grass, false = rock
-    public static bool[,] Generate(int width, int height, float scale, int seed = 0)
+    public static bool[,] Generate(int width, int height, float scale, float amplitude, int seed = 0)
     {
         bool[,] map = new bool[width, height];
         
@@ -14,7 +14,7 @@ public static class MapGenerator
                 float sampleX = (float)x / width * scale;
                 float sampleY = (float)y / height * scale;
 
-                map[x, y] = Mathf.PerlinNoise(sampleX + seed, sampleY + seed) > 0.5f;
+                map[x, y] = Mathf.PerlinNoise(sampleX + seed, sampleY + seed) > amplitude;
             }
         }
 

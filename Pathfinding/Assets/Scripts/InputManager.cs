@@ -24,8 +24,8 @@ public class InputManager : MonoBehaviour
 
     void Update()
     {
-        // left click
-        if (Input.GetMouseButtonDown(0)) 
+        // left hold -> change terrain
+        if (Input.GetMouseButton(0)) 
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
             if (hit.collider == null)
@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
             mapManager.ChangeTile(clickPos);
         }
 
-        // right click
+        // right click -> move player
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
@@ -61,6 +61,11 @@ public class InputManager : MonoBehaviour
                 playerMovement.SetPath(path);
             }
 
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            AlgorithmVisualizer.Instance.ShowHide();
         }
     }
 }
