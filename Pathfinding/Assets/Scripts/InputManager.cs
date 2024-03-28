@@ -1,20 +1,17 @@
-using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.Tilemaps;
-using System.Net;
-using System;
+
+
+public enum Algorithm { ASTAR, ASTAR_PARALLEL }
 
 public class InputManager : MonoBehaviour
 {
 
-    [SerializeField] LayerMask layer;
+    [SerializeField] private LayerMask layer;
+    [SerializeField] Algorithm algorithm;
 
-    MapManager mapManager;
-    PlayerMovement playerMovement;
-    Camera cam;
+    private MapManager mapManager;
+    private PlayerMovement playerMovement;
+    private Camera cam;
     void Start()
     {
         mapManager = FindObjectOfType<MapManager>();
@@ -55,6 +52,17 @@ public class InputManager : MonoBehaviour
             if (playerPos == clickPos) return;
 
             var path = Astar.GetPath(playerPos, clickPos, MapManager.Map);
+
+
+            switch (algorithm)
+            {
+                case Algorithm.ASTAR:
+                    path = Astar.GetPath(playerPos, clickPos, MapManager.Map);
+                    break;
+                case Algorithm.ASTAR_PARALLEL:
+                    path = ParallelAstar.GetPath(playerPos, clickPos, MapManager.Map);
+                    break;
+            }
 
             if(path != null)
             {

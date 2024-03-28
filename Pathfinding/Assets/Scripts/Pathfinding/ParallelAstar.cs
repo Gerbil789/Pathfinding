@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-
-public static class Astar 
+using Unity.VisualScripting;
+using System.Threading;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+public static class ParallelAstar 
 {
     private class Node
     {
@@ -25,6 +27,8 @@ public static class Astar
     private static bool[,] map;
     private static Dictionary<Vector3Int, Node> allNodes;
 
+    
+
     public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end, bool[,] map)
     {
         try
@@ -42,9 +46,9 @@ public static class Astar
             }
 
             //initialize
-            Astar.start = start;
-            Astar.end = end;
-            Astar.map = map;
+            ParallelAstar.start = start;
+            ParallelAstar.end = end;
+            ParallelAstar.map = map;
             path = null;
             openList = new();
             closedList = new();
@@ -55,7 +59,6 @@ public static class Astar
             //run algorithm
             Algorithm();
 
-            //visualize TODO: move somewhere else
             foreach (var node in allNodes.Values)
             {
                 AlgorithmVisualizer.Instance.SetTile(node.position, Color.white);
@@ -78,6 +81,7 @@ public static class Astar
             return null;
         }
     }
+
     static Node GetNode(Vector3Int pos)
     {
         if (allNodes.ContainsKey(pos))
@@ -91,6 +95,8 @@ public static class Astar
             return node;
         }
     }
+
+
     static void Algorithm()
     {
         var current = GetNode(start);
@@ -98,8 +104,7 @@ public static class Astar
 
         while (openList.Count > 0 && path == null)
         {
-            List<Node> neighbors = FindNeighbors(current.position);
-            ExamineNeighbors(neighbors, current);
+            ProcessNeighbors(current);
             UpdateCurrentTile( ref current);
 
             if (current.position == end) 
@@ -113,42 +118,61 @@ public static class Astar
             Debug.LogWarning("Path not found");
         }
     }
-    static List <Node> FindNeighbors(Vector3Int parentPos){
-        List<Node> neighbors = new List<Node>();
-        for(int x = -1 ; x <= 1; x++){
-            for(int y = -1 ; y <= 1; y++){
-                if(x == 0 && y == 0) continue;
 
-                Vector3Int neighborPos = new Vector3Int(parentPos.x + x, parentPos.y + y, parentPos.z);
-                
-                if(neighborPos == start || IsOutOfBounds(neighborPos) || !map[neighborPos.x, neighborPos.y])
-                {
-                    continue;
-                }
+    static void ProcessNeighbors(Node parent)
+    {
+        Thread[] threads = new Thread[8];
+        int i = 0;
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
 
-                neighbors.Add(GetNode(neighborPos));
+                Vector3Int neighborPos = parent.position + new Vector3Int(x, y, 0);
+                int threadIndex = i;
+                threads[i] = new Thread(() => ExamineNeighbor(neighborPos, parent));
+                threads[i].Start();
+                i++;
             }
         }
-        return neighbors;
+
+        foreach (Thread thread in threads)
+        {
+            thread.Join();
+        }
     }
+
+    static void ExamineNeighbor(Vector3Int neighborPos, Node parent)
+    {
+        if (neighborPos == start || IsOutOfBounds(neighborPos) || !map[neighborPos.x, neighborPos.y])
+        {
+            return;
+        }
+
+        var neighbor = GetNode(neighborPos);
+
+        int gScore = DetermineGScore(neighbor.position, parent.position);
+
+        if (openList.Contains(neighbor))
+        {
+            if (parent.G + gScore < neighbor.G)
+            {
+                CalcValues(parent, neighbor, gScore);
+            }
+        }
+        else if (!closedList.Contains(neighbor))
+        {
+            CalcValues(parent, neighbor, gScore);
+            openList.Add(neighbor);
+        }
+    }
+
     static bool IsOutOfBounds(Vector3Int pos)
     {
         return pos.x < 0 || pos.y < 0 || pos.x >= MapManager.MapSize.x || pos.y >= MapManager.MapSize.y;
     }
-    static void ExamineNeighbors(List<Node> neighbors, Node current){
-        foreach(var neighbor in neighbors){
-            int gScore = DetermineGScore(neighbor.position, current.position);
 
-            if(openList.Contains(neighbor)){
-                if(current.G + gScore < neighbor.G){
-                    CalcValues(current, neighbor, gScore);
-                }
-            }else if(!closedList.Contains(neighbor)){
-                CalcValues(current, neighbor, gScore);
-                openList.Add(neighbor);
-            }
-        }
-    }
     static int DetermineGScore(Vector3Int neighbor, Vector3Int current)
     {
         int gScore; 
@@ -164,12 +188,14 @@ public static class Astar
         }
         return gScore;
     }
+
     static void CalcValues(Node parent, Node neighbor, int cost){
         neighbor.parent = parent;
         neighbor.G = parent.G + cost;
         neighbor.H = ((Mathf.Abs((neighbor.position.x - end.x)) + (Mathf.Abs(neighbor.position.y - end.y))) * 10);
         neighbor.F = neighbor.G + neighbor.H;
     }
+
     static void UpdateCurrentTile(ref Node current){
         openList.Remove(current);
         closedList.Add(current);
@@ -178,6 +204,7 @@ public static class Astar
             current = openList.OrderBy(x => x.F).First();
         }
     }
+
     static Stack<Vector3Int> GeneratePath(Node current){
         Stack<Vector3Int> path = new();
 
