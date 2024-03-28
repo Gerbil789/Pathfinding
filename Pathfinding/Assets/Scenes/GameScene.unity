@@ -610,14 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b82e625f3bf8b849ae761c939401902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMap: {fileID: 1145850409}
-  layer:
-    serializedVersion: 2
-    m_Bits: 64
-  startPos: {x: 50, y: 50}
-  start: {x: 0, y: 0, z: 0}
-  goal: {x: 0, y: 0, z: 0}
-  movementSpeed: 10
+  movementSpeed: 20
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

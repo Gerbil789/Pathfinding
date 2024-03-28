@@ -9,19 +9,20 @@ public static class Astar
     private static HashSet<Node> openList, closedList;
     private static bool[,] map;
     private static Dictionary<Vector3Int, Node> allNodes;
-    private static Node current;
     public static Stack<Vector3Int> GetPath(Vector3Int _start, Vector3Int _end, bool[,] _map)
     {
         try
         {
             if (_map[_start.x, _start.y] == false)
             {
-                throw new ArgumentException("Invalid start position");
+                Debug.LogWarning("Invalid start position");
+                return null;
             }
 
             if (_map[_end.x, _end.y] == false)
             {
-                throw new ArgumentException("Invalid end position");
+                Debug.LogWarning("Invalid end position");
+                return null;
             }
 
             //initialize
@@ -34,13 +35,11 @@ public static class Astar
             allNodes = new();
 
             //run algorithm
-            current = GetNode(start);
-            openList.Add(current);
             Algorithm();
 
             return path;
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.LogError(ex.Message);
             return null;
@@ -64,7 +63,10 @@ public static class Astar
 
     static void Algorithm()
     {
-        while(openList.Count > 0 && path == null)
+        var current = GetNode(start);
+        openList.Add(current);
+
+        while (openList.Count > 0 && path == null)
         {
             List<Node> neighbors = FindNeighbors(current.position);
             ExamineNeighbors(neighbors, current);
@@ -89,15 +91,21 @@ public static class Astar
                 if(x == 0 && y == 0) continue;
 
                 Vector3Int neighborPos = new Vector3Int(parentPos.x + x, parentPos.y + y, parentPos.z);
-
-                if(neighborPos == start || !map[neighborPos.x, neighborPos.y])
+                
+                if(neighborPos == start || IsOutOfBounds(neighborPos) || !map[neighborPos.x, neighborPos.y])
                 {
                     continue;
                 }
+
                 neighbors.Add(GetNode(neighborPos));
             }
         }
         return neighbors;
+    }
+
+    static bool IsOutOfBounds(Vector3Int pos)
+    {
+        return pos.x < 0 || pos.y < 0 || pos.x >= MapManager.MapSize.x || pos.y >= MapManager.MapSize.y;
     }
 
     static void ExamineNeighbors(List<Node> neighbors, Node current){

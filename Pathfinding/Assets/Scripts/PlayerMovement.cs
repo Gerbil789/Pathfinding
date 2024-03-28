@@ -1,12 +1,14 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Stack<Vector3Int> path;
     [SerializeField] private float movementSpeed = 1f;
-    private Vector3 dirNormalized = Vector3.zero;
-    private Vector3 target;
+    private Stack<Vector3Int> path;
+    //private Vector3 dir = Vector3.zero;
+
+    private Coroutine movementCoroutine;
 
     void Start()
     {
@@ -15,22 +17,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if(path != null)
+        if (path != null && path.Count > 0 && movementCoroutine == null)
         {
-            if(path.Count > 0)
-            {
-                target = path.Peek();
-            
-                dirNormalized = (target - transform.position).normalized;
-            
-                if(Vector3.Distance(target, transform.position) <= 0.01f){
-                    target = path.Pop();  
-                }else{
-                    transform.Translate(dirNormalized * Time.deltaTime * movementSpeed, Space.Self);
-                }
-            }   
-        }      
-        
+            Vector3Int target = path.Pop();
+            movementCoroutine = StartCoroutine(MoveToTarget(target));
+        }
+    }
+
+    IEnumerator MoveToTarget(Vector3 targetPosition)
+    {
+        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+            yield return null;
+        }
+        transform.position = targetPosition;
+        movementCoroutine = null; // Reset coroutine to allow movement to the next target
     }
 
     public void SetPath(Stack<Vector3Int> _path)
