@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
@@ -25,8 +26,8 @@ public class GameManager : MonoBehaviour
     {
         var visualizer = AlgorithmVisualizer.Instance;
 
-        Astar.TileVisited += visualizer.VisualizeTile;
-        Astar.PathFound += visualizer.VisualizePath;
+        Pathfinding.TileVisited += visualizer.VisualizeTile;
+        Pathfinding.PathFound += visualizer.VisualizePath;
     }
 
 

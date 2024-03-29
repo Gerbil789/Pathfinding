@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public enum Algorithm { ASTAR, ASTAR_PARALLEL }
+public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS }
 
 public class InputManager : MonoBehaviour
 {
@@ -64,10 +64,13 @@ public class InputManager : MonoBehaviour
             switch (algorithm)
             {
                 case Algorithm.ASTAR:
-                    path = Astar.GetPath(playerPos, clickPos);
+                    path = Pathfinding.Astar.GetPath(playerPos, clickPos);
                     break;
                 case Algorithm.ASTAR_PARALLEL:
-                    path = ParallelAstar.GetPath(playerPos, clickPos);
+                    path = Pathfinding.ParallelAstar.GetPath(playerPos, clickPos);
+                    break;
+                case Algorithm.DFS:
+                    path = Pathfinding.DFS.GetPath(playerPos, clickPos);
                     break;
             }
             stopwatch.Stop();
