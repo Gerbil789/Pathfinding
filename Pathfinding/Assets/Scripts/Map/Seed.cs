@@ -12,6 +12,7 @@ public class Seed : MonoBehaviour
     public int seed = 0;
     public string seedText = "000000";
     public TMPro.TMP_InputField inputField;
+    public TMPro.TMP_Dropdown sizeDropDown;
 
     void Start()
     {
@@ -41,10 +42,20 @@ public class Seed : MonoBehaviour
     {
         if(seedText == "")
         {
-            Debug.Log("No seed!");
+            Debug.LogWarning("No seed!");
             return;
         }
         PlayerPrefs.SetInt("seed", seed);
+
+        if (sizeDropDown.value == 0)
+            PlayerPrefs.SetInt("size", (int)SizeEnum.Size_64x64);
+        else if(sizeDropDown.value == 1)
+            PlayerPrefs.SetInt("size", (int)SizeEnum.Size_128x128);
+        else if(sizeDropDown.value == 2)
+            PlayerPrefs.SetInt("size", (int)SizeEnum.Size_256x256);
+        else if(sizeDropDown.value == 3)
+            PlayerPrefs.SetInt("size", (int)SizeEnum.Size_512x512);
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

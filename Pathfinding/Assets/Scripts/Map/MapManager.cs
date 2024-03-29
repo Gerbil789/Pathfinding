@@ -26,7 +26,7 @@ public class MapManager : MonoBehaviour
 
     //public Vector2Int mapSize = new Vector2Int(64, 64);
 
-    [SerializeField] SizeEnum mapSize;
+    [SerializeField] SizeEnum mapSize = SizeEnum.Size_64x64;
 
     public int seed;
     public float scale = 4f;
@@ -40,7 +40,10 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Map == null) 
+        seed = PlayerPrefs.GetInt("seed", seed);
+        mapSize = (SizeEnum)PlayerPrefs.GetInt("size", (int)mapSize);
+
+        if (Map == null) 
             GenerateMap();
     }
 

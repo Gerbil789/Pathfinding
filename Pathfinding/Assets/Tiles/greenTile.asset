@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: DebugTile
+  m_Name: greenTile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 1a30e9115d633a84c8ab48d90ce1e83b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 70a15ed55bf3a544f8db56091202cda5, type: 3}
+  m_Color: {r: 0.37236938, g: 0.5, b: 0.3419811, a: 1}
   m_Transform:
     e00: 1
     e01: 0
