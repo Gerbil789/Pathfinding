@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space)){
-            PauseGame();
-        }
-    }
-
-    void PauseGame(){
+    public static void PauseGame(){
         if(Time.timeScale == 0){
             Time.timeScale = 1;
         }else{

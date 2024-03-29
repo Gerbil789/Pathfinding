@@ -24,22 +24,21 @@ public static class ParallelAstar
     private static Vector3Int start, end;
     private static Stack<Vector3Int> path;
     private static HashSet<Node> openList, closedList;
-    private static bool[,] map;
     private static Dictionary<Vector3Int, Node> allNodes;
 
     
 
-    public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end, bool[,] map)
+    public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
     {
         try
         {
-            if (map[start.x, start.y] == false)
+            if (MapManager.Map[start.x, start.y] == false)
             {
                 Debug.LogWarning("Invalid start position");
                 return null;
             }
 
-            if (map[end.x, end.y] == false)
+            if (MapManager.Map[end.x, end.y] == false)
             {
                 Debug.LogWarning("Invalid end position");
                 return null;
@@ -48,7 +47,6 @@ public static class ParallelAstar
             //initialize
             ParallelAstar.start = start;
             ParallelAstar.end = end;
-            ParallelAstar.map = map;
             path = null;
             openList = new();
             closedList = new();
@@ -145,7 +143,7 @@ public static class ParallelAstar
 
     static void ExamineNeighbor(Vector3Int neighborPos, Node parent)
     {
-        if (neighborPos == start || IsOutOfBounds(neighborPos) || !map[neighborPos.x, neighborPos.y])
+        if (neighborPos == start || IsOutOfBounds(neighborPos) || !MapManager.Map[neighborPos.x, neighborPos.y])
         {
             return;
         }

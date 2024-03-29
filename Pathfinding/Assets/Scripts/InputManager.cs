@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public enum Algorithm { ASTAR, ASTAR_PARALLEL }
 public class InputManager : MonoBehaviour
 {
 
-    [SerializeField] private LayerMask layer;
+    private LayerMask layer;
     [SerializeField] Algorithm algorithm;
 
     private MapManager mapManager;
@@ -18,6 +19,7 @@ public class InputManager : MonoBehaviour
         mapManager = FindObjectOfType<MapManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         cam = FindObjectOfType<Camera>();
+        layer = LayerMask.GetMask("hit");
     }
 
     void Update()
@@ -52,18 +54,19 @@ public class InputManager : MonoBehaviour
             var playerPos = mapManager.tileMap.WorldToCell(playerMovement.transform.position);
             if (playerPos == clickPos) return;
 
-            var path = Astar.GetPath(playerPos, clickPos, MapManager.Map);
+         
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+            Stack<Vector3Int> path = null;
             switch (algorithm)
             {
                 case Algorithm.ASTAR:
-                    path = Astar.GetPath(playerPos, clickPos, MapManager.Map);
+                    path = Astar.GetPath(playerPos, clickPos);
                     break;
                 case Algorithm.ASTAR_PARALLEL:
-                    path = ParallelAstar.GetPath(playerPos, clickPos, MapManager.Map);
+                    path = ParallelAstar.GetPath(playerPos, clickPos);
                     break;
             }
             stopwatch.Stop();
@@ -76,9 +79,16 @@ public class InputManager : MonoBehaviour
 
         }
 
+        // show/hide algorithm visualizer
         if(Input.GetKeyDown(KeyCode.Tab))
         {
             AlgorithmVisualizer.Instance.ShowHide();
+        }
+
+        // pause game
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.PauseGame();
         }
     }
 }

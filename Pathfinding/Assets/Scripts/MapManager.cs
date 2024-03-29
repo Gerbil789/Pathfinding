@@ -29,11 +29,23 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        MapSize = mapSize;
-        //seed = PlayerPrefs.GetInt("seed");
-        Map = MapGenerator.Generate(MapSize.x, MapSize.y, scale, amplitude, seed);
+        if(Map == null) 
+            GenerateMap();
+    }
 
+    public void GenerateMap()
+    {
+        tileMap.ClearAllTiles();
+
+        MapSize = mapSize;
+        Map = MapGenerator.Generate(MapSize.x, MapSize.y, scale, amplitude, seed);
         DrawMap(Map, tileMap);
+    }
+
+    public void ClearMap()
+    {
+        tileMap.ClearAllTiles();
+        Map = null;
     }
 
     public void ChangeTile(Vector3Int clickPos)
@@ -44,7 +56,7 @@ public class MapManager : MonoBehaviour
     }
 
     public void SelectType(string type){
-        currentTileType = (TileType)System.Enum.Parse( typeof(TileType), type );
+        currentTileType = (TileType)System.Enum.Parse( typeof(TileType), type);
     }
 
     public void DrawMap(bool[,] map, Tilemap tilemap)
@@ -65,6 +77,4 @@ public class MapManager : MonoBehaviour
             }
         }
     }
-
-
 }

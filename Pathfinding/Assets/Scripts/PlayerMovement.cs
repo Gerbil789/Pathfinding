@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 1f;
     private Stack<Vector3Int> path;
-    //private Vector3 dir = Vector3.zero;
 
     private Coroutine movementCoroutine;
 
@@ -20,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
         if (path != null && path.Count > 0 && movementCoroutine == null)
         {
             Vector3Int target = path.Pop();
+
+            //use coroutine to move smoothly independent of frame rate
             movementCoroutine = StartCoroutine(MoveToTarget(target));
         }
     }

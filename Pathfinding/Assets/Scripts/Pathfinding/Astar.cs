@@ -11,40 +11,34 @@ public static class Astar
         public int H { get; set; }
         public int F { get; set; }
         public Node parent { get; set; }
-        public Vector3Int position { get; set; }
-
-        public Node(Vector3Int position)
-        {
-            this.position = position;
-        }
+        public Vector2Int position { get; set; }
+        public Node(Vector2Int position) => this.position = position;
     }
 
-    private static Vector3Int start, end;
+    private static Vector2Int start, end;
     private static Stack<Vector3Int> path;
     private static HashSet<Node> openList, closedList;
-    private static bool[,] map;
-    private static Dictionary<Vector3Int, Node> allNodes;
+    private static Dictionary<Vector2Int, Node> allNodes;
 
-    public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end, bool[,] map)
+    public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
     {
         try
         {
-            if (map[start.x, start.y] == false)
+            if (MapManager.Map[start.x, start.y] == false)
             {
                 Debug.LogWarning("Invalid start position");
                 return null;
             }
 
-            if (map[end.x, end.y] == false)
+            if (MapManager.Map[end.x, end.y] == false)
             {
                 Debug.LogWarning("Invalid end position");
                 return null;
             }
 
             //initialize
-            Astar.start = start;
-            Astar.end = end;
-            Astar.map = map;
+            Astar.start = (Vector2Int)start;
+            Astar.end = (Vector2Int)end;
             path = null;
             openList = new();
             closedList = new();
@@ -58,15 +52,18 @@ public static class Astar
             //visualize TODO: move somewhere else
             foreach (var node in allNodes.Values)
             {
-                AlgorithmVisualizer.Instance.SetTile(node.position, Color.white);
+                AlgorithmVisualizer.Instance.SetTile((Vector3Int)node.position, Color.white);
             }
 
             if (path != null)
             {
                 foreach(var pos in path)
                 {
-                    AlgorithmVisualizer.Instance.SetTile(pos, Color.blue);
+                    AlgorithmVisualizer.Instance.SetTile((Vector3Int)pos, Color.blue, 0.3f);
                 }
+
+                AlgorithmVisualizer.Instance.SetTile((Vector3Int)start, Color.blue, 0.5f);
+                AlgorithmVisualizer.Instance.SetTile((Vector3Int)end, Color.blue, 0.5f);
                 
             }
 
@@ -78,7 +75,7 @@ public static class Astar
             return null;
         }
     }
-    static Node GetNode(Vector3Int pos)
+    static Node GetNode(Vector2Int pos)
     {
         if (allNodes.ContainsKey(pos))
         {
@@ -113,15 +110,15 @@ public static class Astar
             Debug.LogWarning("Path not found");
         }
     }
-    static List <Node> FindNeighbors(Vector3Int parentPos){
+    static List <Node> FindNeighbors(Vector2Int parentPos){
         List<Node> neighbors = new List<Node>();
         for(int x = -1 ; x <= 1; x++){
             for(int y = -1 ; y <= 1; y++){
                 if(x == 0 && y == 0) continue;
 
-                Vector3Int neighborPos = new Vector3Int(parentPos.x + x, parentPos.y + y, parentPos.z);
+                Vector2Int neighborPos = new Vector2Int(parentPos.x + x, parentPos.y + y);
                 
-                if(neighborPos == start || IsOutOfBounds(neighborPos) || !map[neighborPos.x, neighborPos.y])
+                if(neighborPos == start || IsOutOfBounds(neighborPos) || !MapManager.Map[neighborPos.x, neighborPos.y])
                 {
                     continue;
                 }
@@ -131,7 +128,7 @@ public static class Astar
         }
         return neighbors;
     }
-    static bool IsOutOfBounds(Vector3Int pos)
+    static bool IsOutOfBounds(Vector2Int pos)
     {
         return pos.x < 0 || pos.y < 0 || pos.x >= MapManager.MapSize.x || pos.y >= MapManager.MapSize.y;
     }
@@ -149,7 +146,7 @@ public static class Astar
             }
         }
     }
-    static int DetermineGScore(Vector3Int neighbor, Vector3Int current)
+    static int DetermineGScore(Vector2Int neighbor, Vector2Int current)
     {
         int gScore; 
         int x = current.x - neighbor.x;
@@ -182,7 +179,7 @@ public static class Astar
         Stack<Vector3Int> path = new();
 
         while(current.position != start){
-            path.Push(current.position);
+            path.Push((Vector3Int)current.position);
             current = current.parent;
         }
         return path;
