@@ -178,8 +178,21 @@ public static class Astar
     static Stack<Vector3Int> GeneratePath(Node current){
         Stack<Vector3Int> path = new();
 
-        while(current.position != start){
-            path.Push((Vector3Int)current.position);
+        // push the end node
+        path.Push((Vector3Int)current.position);
+        var dir = current.position - current.parent.position;
+        current = current.parent;
+
+        // push the rest of the path 
+        while (current.position != start){
+            var newDir = current.position - current.parent.position;
+
+            //push only if direction changes
+            if(newDir != dir)
+            {
+                path.Push((Vector3Int)current.position);
+                dir = newDir;
+            }
             current = current.parent;
         }
         return path;
