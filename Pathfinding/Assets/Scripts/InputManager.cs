@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -54,8 +55,8 @@ public class InputManager : MonoBehaviour
             var playerPos = mapManager.tileMap.WorldToCell(playerMovement.transform.position);
             if (playerPos == clickPos) return;
 
-         
 
+            AlgorithmVisualizer.Instance.Clear();
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -79,6 +80,8 @@ public class InputManager : MonoBehaviour
 
         }
 
+
+
         // show/hide algorithm visualizer
         if(Input.GetKeyDown(KeyCode.Tab))
         {
@@ -91,4 +94,5 @@ public class InputManager : MonoBehaviour
             GameManager.PauseGame();
         }
     }
+
 }

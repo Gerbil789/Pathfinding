@@ -15,10 +15,15 @@ public static class Astar
         public Node(Vector2Int position) => this.position = position;
     }
 
+    //variables
     private static Vector2Int start, end;
     private static Stack<Vector3Int> path;
     private static HashSet<Node> openList, closedList;
     private static Dictionary<Vector2Int, Node> allNodes;
+
+    //events (for algorithm visualizer)
+    public static event Action<Vector2Int> TileVisited;
+    public static event Action<Stack<Vector3Int>> PathFound;
 
     public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
     {
@@ -44,28 +49,8 @@ public static class Astar
             closedList = new();
             allNodes = new();
 
-            AlgorithmVisualizer.Instance.Clear();
-
             //run algorithm
             Algorithm();
-
-            //visualize TODO: move somewhere else
-            foreach (var node in allNodes.Values)
-            {
-                AlgorithmVisualizer.Instance.SetTile((Vector3Int)node.position, Color.white);
-            }
-
-            if (path != null)
-            {
-                foreach(var pos in path)
-                {
-                    AlgorithmVisualizer.Instance.SetTile((Vector3Int)pos, Color.blue, 0.3f);
-                }
-
-                AlgorithmVisualizer.Instance.SetTile((Vector3Int)start, Color.blue, 0.5f);
-                AlgorithmVisualizer.Instance.SetTile((Vector3Int)end, Color.blue, 0.5f);
-                
-            }
 
             return path;
         }
@@ -102,6 +87,7 @@ public static class Astar
             if (current.position == end) 
             {
                 path = GeneratePath(current);
+                PathFound.Invoke(new Stack<Vector3Int>(path)); //copy path to avoid modifying the original
             }
         }
 
@@ -143,7 +129,10 @@ public static class Astar
             }else if(!closedList.Contains(neighbor)){
                 CalcValues(current, neighbor, gScore);
                 openList.Add(neighbor);
+                TileVisited?.Invoke(neighbor.position);
             }
+
+            
         }
     }
     static int DetermineGScore(Vector2Int neighbor, Vector2Int current)
@@ -180,21 +169,25 @@ public static class Astar
 
         // push the end node
         path.Push((Vector3Int)current.position);
-        var dir = current.position - current.parent.position;
+        //var dir = current.position - current.parent.position;
         current = current.parent;
 
         // push the rest of the path 
         while (current.position != start){
-            var newDir = current.position - current.parent.position;
+            //var newDir = current.position - current.parent.position;
 
-            //push only if direction changes
-            if(newDir != dir)
-            {
-                path.Push((Vector3Int)current.position);
-                dir = newDir;
-            }
+            ////push only if direction changes
+            //if(newDir != dir)
+            //{
+            //    path.Push((Vector3Int)current.position);
+            //    dir = newDir;
+            //}
+            path.Push((Vector3Int)current.position);
             current = current.parent;
         }
+
+        // push the start node
+        path.Push((Vector3Int)current.position);
         return path;
     }
 }

@@ -57,19 +57,19 @@ public static class ParallelAstar
             //run algorithm
             Algorithm();
 
-            foreach (var node in allNodes.Values)
-            {
-                AlgorithmVisualizer.Instance.SetTile(node.position, Color.white);
-            }
+            //foreach (var node in allNodes.Values)
+            //{
+            //    AlgorithmVisualizer.Instance.SetTile(node.position, Color.white);
+            //}
 
-            if (path != null)
-            {
-                foreach(var pos in path)
-                {
-                    AlgorithmVisualizer.Instance.SetTile(pos, Color.blue);
-                }
+            //if (path != null)
+            //{
+            //    foreach(var pos in path)
+            //    {
+            //        AlgorithmVisualizer.Instance.SetTile(pos, Color.blue);
+            //    }
                 
-            }
+            //}
 
             return path;
         }

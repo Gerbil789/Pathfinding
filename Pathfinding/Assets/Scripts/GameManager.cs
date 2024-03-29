@@ -1,14 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class GameManager : MonoBehaviour
 {
-    public static void PauseGame(){
-        if(Time.timeScale == 0){
-            Time.timeScale = 1;
-        }else{
-            Time.timeScale = 0;
+    private static GameManager instance;
+
+    private void Awake()
+    {
+        // Ensure only one instance of GameManager exists
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        var visualizer = AlgorithmVisualizer.Instance;
+
+        Astar.TileVisited += visualizer.VisualizeTile;
+        Astar.PathFound += visualizer.VisualizePath;
+    }
+
+
+    public static void PauseGame(float? duration = null)
+    {
+        if (duration == null) //normal pause/resume
+        {
+            Time.timeScale = (Time.timeScale == 0) ? 1f : 0f;
+        }
+        else // pause for a specific duration
+        {
+            Time.timeScale = 0f; 
+            instance.StartCoroutine(ResumeAfterDelay(duration.Value));
+        }
+
+    }
+
+    private static IEnumerator ResumeAfterDelay(float duration)
+    {
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f; 
     }
 }
