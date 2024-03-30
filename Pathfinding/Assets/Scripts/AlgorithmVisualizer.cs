@@ -104,4 +104,13 @@ public class AlgorithmVisualizer : MonoBehaviour
     {
         tilemap.ClearAllTiles();
     }
+
+    public void Stop()
+    {
+        StopAllCoroutines();
+        pathQueue.Clear();
+        tilesQueue.Clear();
+        Clear();
+        
+    }
 }

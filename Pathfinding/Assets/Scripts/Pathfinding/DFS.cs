@@ -13,17 +13,7 @@ public static partial class Pathfinding
         {
             try
             {
-                if (MapManager.Map[start.x, start.y] == false)
-                {
-                    Debug.LogWarning("Invalid start position");
-                    return null;
-                }
-
-                if (MapManager.Map[end.x, end.y] == false)
-                {
-                    Debug.LogWarning("Invalid end position");
-                    return null;
-                }
+                if (!IsValidInput(start, end)) return null;
 
                 //initialize
                 Pathfinding.start = (Vector2Int)start;

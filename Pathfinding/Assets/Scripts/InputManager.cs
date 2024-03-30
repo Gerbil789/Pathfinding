@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS }
 
@@ -28,6 +29,11 @@ public class InputManager : MonoBehaviour
         // left hold -> change terrain
         if (Input.GetMouseButton(0)) 
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layer);
             if (hit.collider == null)
             {

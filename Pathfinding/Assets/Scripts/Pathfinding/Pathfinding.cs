@@ -17,4 +17,22 @@ public static partial class Pathfinding
 
     public static event Action<Vector2Int> TileVisited;
     public static event Action<Stack<Vector3Int>> PathFound;
+
+    private static bool IsValidInput(Vector3Int start, Vector3Int end)
+    {
+        if (MapManager.Map[start.x, start.y] == false)
+        {
+            Debug.LogWarning("Invalid start position");
+            return false;
+        }
+
+        if (MapManager.Map[end.x, end.y] == false)
+        {
+            Debug.LogWarning("Invalid end position");
+            return false;
+        }
+
+        return true;
+    }
+
 }

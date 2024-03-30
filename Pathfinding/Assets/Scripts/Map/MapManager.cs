@@ -1,15 +1,20 @@
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Tilemaps;
-using System.Runtime.Serialization;
 
-public enum TileType {ROCK, GRASS, WOOD}
+public enum TileType {ROCK, GRASS}
 public enum SizeEnum
 {
     Size_64x64,
     Size_128x128,
     Size_256x256,
     Size_512x512
+}
+
+public enum MapType
+{
+    RANDOM,
+    MAZE,
 }
 
 [System.Serializable]
@@ -21,16 +26,15 @@ public class TileTypeToTile
 
 public class MapManager : MonoBehaviour
 {
-    public static Vector2Int MapSize = new Vector2Int(32, 32);
+    public static Vector2Int MapSize = new Vector2Int(64, 64);
     public static bool[,] Map;
 
-    //public Vector2Int mapSize = new Vector2Int(64, 64);
-
     [SerializeField] SizeEnum mapSize = SizeEnum.Size_64x64;
+    [SerializeField] MapType mapType = MapType.RANDOM;
 
-    public int seed;
-    public float scale = 4f;
-    public float amplitude = 0.5f;
+    public int seed = 0;
+    public float scale = 16f;
+    public float amplitude = 0.4f;
 
     [SerializeField] TileType currentTileType;
 
@@ -40,11 +44,7 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        seed = PlayerPrefs.GetInt("seed", seed);
-        mapSize = (SizeEnum)PlayerPrefs.GetInt("size", (int)mapSize);
-
-        if (Map == null) 
-            GenerateMap();
+        GenerateMap();
     }
 
     public void GenerateMap()
@@ -53,7 +53,32 @@ public class MapManager : MonoBehaviour
 
         MapSize = GetSize(mapSize);
         Map = MapGenerator.Generate(MapSize.x, MapSize.y, MapSize.x / 64 * scale, amplitude, seed);
+        
+        var visualizer = FindObjectOfType<AlgorithmVisualizer>();
+        visualizer.Stop();
+
+        var player = FindObjectOfType<PlayerMovement>();
+        player.SetPath(null);
+        player.transform.position = new Vector3(MapSize.x / 2, MapSize.y / 2, 0);
+        FindObjectOfType<Camera>().transform.position = new Vector3(MapSize.x / 2, MapSize.y / 2, -10);
+
         DrawMap(Map, tileMap);
+    }
+
+    public void SetMapSize(int size)
+    {
+        mapSize = (SizeEnum)size;
+
+    }
+
+    public void SetSeed(string seed)
+    {
+        int.TryParse(seed, out this.seed);
+    }
+
+    public void SetMapType(int type)
+    {
+        mapType = (MapType)type;
     }
 
     public void ClearMap()
@@ -65,6 +90,7 @@ public class MapManager : MonoBehaviour
     public void ChangeTile(Vector3Int clickPos)
     {
         tileMap.SetTile(clickPos, tiles.FirstOrDefault(x => x.type == currentTileType).tile);
+        tileMap.SetColor(clickPos, Color.white);
 
         Map[clickPos.x, clickPos.y] = currentTileType == TileType.GRASS;
     }
@@ -75,7 +101,6 @@ public class MapManager : MonoBehaviour
 
     public void DrawMap(bool[,] map, Tilemap tilemap)
     {
-        tilemap.ClearAllTiles();
         for (int x = 0; x < map.GetUpperBound(0); x++)
         {
             for (int y = 0; y < map.GetUpperBound(1); y++)
