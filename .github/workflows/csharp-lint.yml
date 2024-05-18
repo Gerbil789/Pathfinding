@@ -1,0 +1,38 @@
+name: C# Linting
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.cs'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**/*.cs'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0'  # Specify the .NET version you need
+
+    - name: Install Roslynator
+      run: dotnet tool install --global Roslynator.DotNet.Cli
+
+    - name: Run Roslynator
+      run: roslynator analyze ./Pathfinding -v d
+
+    - name: Install StyleCop Analyzers
+      run: dotnet add ./Pathfinding package StyleCop.Analyzers --version 1.2.0-beta.354  # Ensure the version is compatible with your project setup
+
+    - name: Run Build to Check StyleCop Warnings
+      run: dotnet build ./PathTo
