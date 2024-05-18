@@ -4,14 +4,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 
-public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS }
+public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS, BIDIRECTIONAL_ASTAR }
 
 public class InputManager : MonoBehaviour
 {
+    public static event Action<Stack<Vector3Int>> PathCalculated;
 
     private LayerMask layer;
-    [SerializeField] Algorithm algorithm;
+    [SerializeField] Algorithm strategy;
 
     private MapManager mapManager;
     private PlayerMovement playerMovement;
@@ -60,35 +64,8 @@ public class InputManager : MonoBehaviour
 
             var playerPos = mapManager.tileMap.WorldToCell(playerMovement.transform.position);
             if (playerPos == clickPos) return;
-
-
-            AlgorithmVisualizer.Instance.Clear();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            Stack<Vector3Int> path = null;
-            switch (algorithm)
-            {
-                case Algorithm.ASTAR:
-                    path = Pathfinding.Astar.GetPath(playerPos, clickPos);
-                    break;
-                case Algorithm.ASTAR_PARALLEL:
-                    path = Pathfinding.ParallelAstar.GetPath(playerPos, clickPos);
-                    break;
-                case Algorithm.DFS:
-                    path = Pathfinding.DFS.GetPath(playerPos, clickPos);
-                    break;
-            }
-            stopwatch.Stop();
-            TimeSpan elapsedTime = stopwatch.Elapsed;
-            UnityEngine.Debug.Log("Time taken to calculate path: " + elapsedTime.TotalMilliseconds + " milliseconds");
-            if (path != null)
-            {
-                playerMovement.SetPath(path);
-            }
-
+            StartCoroutine(StartPathFinding(playerPos, clickPos));
         }
-
 
 
         // show/hide algorithm visualizer
@@ -104,4 +81,42 @@ public class InputManager : MonoBehaviour
         }
     }
 
+
+    IEnumerator StartPathFinding(Vector3Int playerPos, Vector3Int clickPos)
+    {
+        AlgorithmVisualizer.Instance.Clear();
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+        Pathfinding algorithm = strategy switch 
+        { 
+            Algorithm.ASTAR => new Astar(), 
+            Algorithm.ASTAR_PARALLEL => new ParallelAstar(), 
+            Algorithm.DFS => new DFS(), 
+            Algorithm.BIDIRECTIONAL_ASTAR => new BidirectionalAstar(), 
+            _ => throw new Exception("Invalid algorithm")
+        }; 
+
+        // calculate path
+        var path = algorithm.GetPath(playerPos, clickPos);
+
+        if(path != null)
+        {
+            // reverse path
+            Stack<Vector3Int> reversedPath = new Stack<Vector3Int>();
+            foreach (var pos in path)
+            {
+                reversedPath.Push(pos);
+            }
+
+            // visualize path
+            yield return StartCoroutine(AlgorithmVisualizer.Instance.VisualizePath(reversedPath, algorithm.visitedTiles));
+
+            // move player
+            PathCalculated?.Invoke(reversedPath); 
+        }
+
+        stopwatch.Stop();
+        UnityEngine.Debug.Log($"Time taken to calculate path: {stopwatch.Elapsed.TotalMilliseconds} milliseconds");
+    }
 }

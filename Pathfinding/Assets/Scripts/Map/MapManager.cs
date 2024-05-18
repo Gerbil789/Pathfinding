@@ -36,6 +36,7 @@ public class MapManager : MonoBehaviour
     public float scale = 16f;
     public float amplitude = 0.4f;
 
+
     [SerializeField] TileType currentTileType;
 
     [SerializeField] public Tilemap tileMap;
@@ -52,13 +53,17 @@ public class MapManager : MonoBehaviour
         tileMap.ClearAllTiles();
 
         MapSize = GetSize(mapSize);
-        Map = MapGenerator.Generate(MapSize.x, MapSize.y, MapSize.x / 64 * scale, amplitude, seed);
+        Map = mapType switch
+        {
+            MapType.RANDOM => MapGenerator.GenerateNoise(MapSize.x, MapSize.y, MapSize.x / 64 * scale, amplitude, seed),
+            MapType.MAZE => MapGenerator.GenerateMaze(MapSize.x, MapSize.y, seed),
+            _ => MapGenerator.GenerateNoise(MapSize.x, MapSize.y, scale, amplitude, seed)
+        };
         
         var visualizer = FindObjectOfType<AlgorithmVisualizer>();
         visualizer.Stop();
 
         var player = FindObjectOfType<PlayerMovement>();
-        player.SetPath(null);
         player.transform.position = new Vector3(MapSize.x / 2, MapSize.y / 2, 0);
         FindObjectOfType<Camera>().transform.position = new Vector3(MapSize.x / 2, MapSize.y / 2, -10);
 

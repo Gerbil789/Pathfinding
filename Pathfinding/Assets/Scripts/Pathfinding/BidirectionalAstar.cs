@@ -3,34 +3,34 @@ using UnityEngine;
 using System.Linq;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
-public static partial class Pathfinding
+public class BidirectionalAstar : Pathfinding
 {
-    public static class BidirectionalAstar
+    public override Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
     {
-        public static Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
-        {
-            try
-            {
-                path = null;
+        return new Stack<Vector3Int>();
+        //CancellationTokenSource cts = new CancellationTokenSource();
+        //Task<Stack<Vector3Int>> task1 = Task.Run(() => Astar.GetPath(start, end, cts.Token));
+        //Task<Stack<Vector3Int>> task2 = Task.Run(() => Astar.GetPath(end, start, cts.Token));
 
-                //Thread thread1 = new Thread(() => GetPath(start, end));
-                //Thread thread2 = new Thread(() => GetPath(end, start));
+        //Task<Stack<Vector3Int>> completedTask = await Task.WhenAny(task1, task2);
 
-                //thread1.Start();
-                //thread2.Start();
+        //cts.Cancel();  // Request cancellation of the other task
 
-
-
-              
-
-                return path;
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError(ex.Message);
-                return null;
-            }
-        }
+        //try
+        //{
+        //    return await completedTask;
+        //}
+        //catch (OperationCanceledException)
+        //{
+        //    return null;
+        //}
+        //catch (Exception ex)
+        //{
+        //    Debug.LogError(ex.Message);
+        //    return null;
+        //}
     }
 }
+

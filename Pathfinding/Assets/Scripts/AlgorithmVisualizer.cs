@@ -1,16 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 public class AlgorithmVisualizer : MonoBehaviour
 {
+    [SerializeField] private bool visualize = true;
     static AlgorithmVisualizer instance;
     [SerializeField] private Tilemap tilemap;
     [SerializeField] private TileBase tile;
     [SerializeField] private float visualizationDelay = 0.05f;
+    [SerializeField] private float pathDelay = 0.05f;
 
-    public static event Action VisualizationFinished;
+    //public static event Action<Stack<Vector3Int>> VisualizationFinished;
 
     struct VisualizationData
     {
@@ -24,10 +28,7 @@ public class AlgorithmVisualizer : MonoBehaviour
         }
     }
 
-    private Queue<VisualizationData> tilesQueue = new Queue<VisualizationData>();
-    private Queue<VisualizationData> pathQueue = new Queue<VisualizationData>();
 
-    private bool isVisualizing = false;
     public static AlgorithmVisualizer Instance
     {
         get
@@ -45,50 +46,49 @@ public class AlgorithmVisualizer : MonoBehaviour
         tilemap.gameObject.SetActive(!tilemap.isActiveAndEnabled);
     }
 
-    public void VisualizeTile(Vector2Int position)
+    public IEnumerator VisualizePath(Stack<Vector3Int> path, Queue<Vector2Int> visitedTiles)
     {
-        tilesQueue.Enqueue(new VisualizationData((Vector3Int)position, Color.white, 0.1f));
-        if (!isVisualizing)
+        if (!visualize)
         {
-            StartCoroutine(VisualizeTilesCoroutine());
-        }
-    }
-
-    private IEnumerator VisualizeTilesCoroutine()
-    {
-        isVisualizing = true;
-
-        while (tilesQueue.Count > 0)
-        {
-            var data = tilesQueue.Dequeue();
-
-            SetTile(data.position, data.color, null);
-
-            yield return new WaitForSeconds(visualizationDelay);
+            Stop();
+            yield break; // stop the coroutine
         }
 
-        while (pathQueue.Count > 0)
+
+        Queue<Vector3Int> convertedQueue = new Queue<Vector3Int>();
+        foreach (Vector2Int vector2Int in visitedTiles)
         {
-            VisualizationData data = pathQueue.Dequeue();
-            SetTile(data.position, data.color, null);
-            yield return new WaitForSeconds(visualizationDelay);
+            Vector3Int vector3Int = new Vector3Int(vector2Int.x, vector2Int.y, 0);
+            convertedQueue.Enqueue(vector3Int);
         }
 
-        isVisualizing = false;
-        VisualizationFinished?.Invoke();
+        yield return StartCoroutine(VisualizeTilesCoroutine(path, convertedQueue));
     }
 
 
-    public void VisualizePath(Stack<Vector3Int> path)
+    private IEnumerator VisualizeTilesCoroutine(Stack<Vector3Int> path, Queue<Vector3Int> visitedTiles)
     {
-        foreach (var pos in path)
+        foreach (var pos in visitedTiles)
         {
-            pathQueue.Enqueue(new VisualizationData(pos, Color.blue, 0.3f));
+            SetTile(pos, Color.white, 0.5f);
+            yield return new WaitForSeconds(visualizationDelay);
         }
 
-        if (!isVisualizing)
+
+        if(path != null)
         {
-            StartCoroutine(VisualizeTilesCoroutine());
+            foreach (var pos in path)
+            {
+                SetTile(pos, Color.blue, 1.0f);
+                yield return new WaitForSeconds(pathDelay);
+            }
+        }
+        else
+        {
+            foreach (var pos in visitedTiles)
+            {
+                SetTile(pos, Color.red, 0.5f);
+            }
         }
     }
 
@@ -108,9 +108,6 @@ public class AlgorithmVisualizer : MonoBehaviour
     public void Stop()
     {
         StopAllCoroutines();
-        pathQueue.Clear();
-        tilesQueue.Clear();
         Clear();
-        
     }
 }

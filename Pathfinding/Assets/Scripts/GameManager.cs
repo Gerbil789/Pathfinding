@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +7,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure only one instance of GameManager exists
         if (instance == null)
         {
             instance = this;
@@ -26,8 +22,8 @@ public class GameManager : MonoBehaviour
     {
         var visualizer = AlgorithmVisualizer.Instance;
 
-        Pathfinding.TileVisited += visualizer.VisualizeTile;
-        Pathfinding.PathFound += visualizer.VisualizePath;
+        //Pathfinding.TileVisited += visualizer.AddTileToQueue;
+        //InputManager.AlgorithmFinished += visualizer.VisualizePath;
     }
 
 

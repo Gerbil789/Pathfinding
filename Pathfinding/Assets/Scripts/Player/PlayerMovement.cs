@@ -1,42 +1,44 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float movementSpeed = 1f;
-    private Stack<Vector3Int> path;
-
-    private Coroutine movementCoroutine;
+    [SerializeField] private float speed = 1f;
 
     void Start()
     {
         transform.position = new Vector3(MapManager.MapSize.x / 2, MapManager.MapSize.y / 2, 0);
+        InputManager.PathCalculated += Move;
+
     }
 
-    void Update()
+    public void Move(Stack<Vector3Int> path)
     {
-        if (path != null && path.Count > 0 && movementCoroutine == null)
+        Stack<Vector3> path3 = new();
+        foreach (var item in path)
         {
-            Vector3Int target = path.Pop();
-
-            //use coroutine to move smoothly independent of frame rate
-            movementCoroutine = StartCoroutine(MoveToTarget(target));
+            path3.Push(item);
         }
+
+        StartCoroutine(MoveCoroutine(path3));
     }
 
-    IEnumerator MoveToTarget(Vector3 targetPosition)
+    private IEnumerator MoveCoroutine(Stack<Vector3> path)
     {
-        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
+
+        foreach (var tilePosition in path)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
-            yield return null;
-        }
-        transform.position = targetPosition;
-        movementCoroutine = null; // Reset coroutine to allow movement to the next target
-    }
+            while (Vector3.Distance(transform.position, tilePosition) > 0.01f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, tilePosition, Time.deltaTime * speed);
+                yield return null;
+            }
 
-    public void SetPath(Stack<Vector3Int> _path)
-    {
-        path = _path;
+            transform.position = tilePosition;
+        }
+
+        //CombatManager.OnUnitTurnEnd?.Invoke(this);
+        //CombatManager.UnitIsMoving = false;
     }
 }
