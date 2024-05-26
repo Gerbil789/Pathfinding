@@ -8,14 +8,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 
-public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS, BIDIRECTIONAL_ASTAR }
+public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS, BIDIRECTIONAL_ASTAR, DOTS_ASTAR}
 
 public class InputManager : MonoBehaviour
 {
     public static event Action<Stack<Vector3Int>> PathCalculated;
 
     private LayerMask layer;
-    [SerializeField] Algorithm strategy;
+    public Algorithm strategy;
 
     private MapManager mapManager;
     private PlayerMovement playerMovement;
@@ -85,8 +85,7 @@ public class InputManager : MonoBehaviour
     IEnumerator StartPathFinding(Vector3Int playerPos, Vector3Int clickPos)
     {
         AlgorithmVisualizer.Instance.Clear();
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
+
 
         Pathfinding algorithm = strategy switch 
         { 
@@ -94,13 +93,19 @@ public class InputManager : MonoBehaviour
             Algorithm.ASTAR_PARALLEL => new ParallelAstar(), 
             Algorithm.DFS => new DFS(), 
             Algorithm.BIDIRECTIONAL_ASTAR => new BidirectionalAstar(), 
+            Algorithm.DOTS_ASTAR => new DOTS_Astar(),
             _ => throw new Exception("Invalid algorithm")
-        }; 
+        };
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         // calculate path
         var path = algorithm.GetPath(playerPos, clickPos);
 
-        if(path != null)
+        stopwatch.Stop();
+        UnityEngine.Debug.Log($"Time taken to calculate path: {stopwatch.Elapsed.TotalMilliseconds} milliseconds");
+
+        if (path != null)
         {
             // reverse path
             Stack<Vector3Int> reversedPath = new Stack<Vector3Int>();
@@ -116,7 +121,6 @@ public class InputManager : MonoBehaviour
             PathCalculated?.Invoke(reversedPath); 
         }
 
-        stopwatch.Stop();
-        UnityEngine.Debug.Log($"Time taken to calculate path: {stopwatch.Elapsed.TotalMilliseconds} milliseconds");
+      
     }
 }
