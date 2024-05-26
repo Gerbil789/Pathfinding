@@ -118,7 +118,11 @@ public class InputManager : MonoBehaviour
             yield return StartCoroutine(AlgorithmVisualizer.Instance.VisualizePath(reversedPath, algorithm.visitedTiles));
 
             // move player
-            PathCalculated?.Invoke(reversedPath); 
+            PathCalculated?.Invoke(reversedPath);
+        }
+        else
+        {
+            yield return StartCoroutine(AlgorithmVisualizer.Instance.VisualizePath(null, algorithm.visitedTiles));
         }
 
       

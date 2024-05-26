@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Unity.Jobs;
 using Unity.VisualScripting;
+using Unity.Burst;
 
 public class DOTS_Astar : Pathfinding
 {
@@ -72,7 +73,7 @@ public class DOTS_Astar : Pathfinding
         return path;
     }
 
-
+    [BurstCompile]
     public struct FindPathJob : IJob
     {
         public int2 startPosition;
@@ -105,17 +106,17 @@ public class DOTS_Astar : Pathfinding
                 }
             }
 
-            NativeArray<int2> neighborOffsetArray = new NativeArray<int2>(8, Allocator.Temp)
-            {
-                [0] = new int2(-1, 0), //left
-                [1] = new int2(+1, 0), //right
-                [2] = new int2(0, +1), //up
-                [3] = new int2(0, -1), //down
-                [4] = new int2(-1, -1), //down left
-                [5] = new int2(-1, +1), //up left
-                [6] = new int2(+1, -1), //down right
-                [7] = new int2(+1, +1), //up right
-            };
+            NativeArray<int2> neighborOffsetArray = new NativeArray<int2>(8, Allocator.Temp);
+
+            neighborOffsetArray[0] = new int2(-1, 0); //left
+            neighborOffsetArray[1] = new int2(+1, 0); //right
+            neighborOffsetArray[2] = new int2(0, +1); //up
+            neighborOffsetArray[3] = new int2(0, -1); //down
+            neighborOffsetArray[4] = new int2(-1, -1); //down left
+            neighborOffsetArray[5] = new int2(-1, +1); //up left
+            neighborOffsetArray[6] = new int2(+1, -1); //down right
+            neighborOffsetArray[7] = new int2(+1, +1); //up right
+            
 
             NativeList<int> openList = new NativeList<int>(Allocator.Temp);
             NativeList<int> closedList = new NativeList<int>(Allocator.Temp);
@@ -190,6 +191,7 @@ public class DOTS_Astar : Pathfinding
                     int2 neighborOffset = neighborOffsetArray[i];
                     int2 neighborPosition = new int2(currentNode.x + neighborOffset.x, currentNode.y + neighborOffset.y);
 
+                    if(IsOutOfBounds(neighborPosition)) continue; //skip if out of bounds
                     if (!MapManager.Map[neighborPosition.x, neighborPosition.y]) continue; //skip unwalkable tiles
 
                     int neighborNodeIndex = CalculateIndex(neighborPosition.x, neighborPosition.y);
@@ -244,6 +246,11 @@ public class DOTS_Astar : Pathfinding
                 }
             }
             return lowestCostFNode.index;
+        }
+
+        bool IsOutOfBounds(int2 pos)
+        {
+            return pos.x < 0 || pos.y < 0 || pos.x >= MapManager.MapSize.x || pos.y >= MapManager.MapSize.y;
         }
 
 
