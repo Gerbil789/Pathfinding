@@ -1,12 +1,11 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
     public InputManager inputManager;
-
 
     public TMP_Dropdown strategyDropdown; 
 
@@ -20,7 +19,10 @@ public class UIManager : MonoBehaviour
         if (strategyDropdown != null)
         {
             strategyDropdown.options.Clear();
-            foreach (var value in System.Enum.GetValues(typeof(Algorithm)))
+
+            List<Algorithm> algorithms = new List<Algorithm>() { Algorithm.ASTAR, Algorithm.DOTS_ASTAR, Algorithm.DFS };
+
+            foreach (var value in algorithms)
             {
                 strategyDropdown.options.Add(new TMP_Dropdown.OptionData(value.ToString()));
             }

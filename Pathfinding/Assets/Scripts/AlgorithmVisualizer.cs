@@ -14,21 +14,7 @@ public class AlgorithmVisualizer : MonoBehaviour
     [SerializeField] private float visualizationDelay = 0.05f;
     [SerializeField] private float pathDelay = 0.05f;
 
-
     //public static event Action<Stack<Vector3Int>> VisualizationFinished;
-
-    struct VisualizationData
-    {
-        public Vector3Int position;
-        public Color color;
-        public VisualizationData(Vector3Int position, Color color, float? alpha)
-        {
-            this.position = position;
-            this.color = color;
-            this.color.a = alpha ?? 1f;
-        }
-    }
-
 
     public static AlgorithmVisualizer Instance
     {
@@ -55,7 +41,6 @@ public class AlgorithmVisualizer : MonoBehaviour
             yield break; // stop the coroutine
         }
 
-
         Queue<Vector3Int> convertedQueue = new Queue<Vector3Int>();
         foreach (Vector2Int vector2Int in visitedTiles)
         {
@@ -65,7 +50,6 @@ public class AlgorithmVisualizer : MonoBehaviour
 
         yield return StartCoroutine(VisualizeTilesCoroutine(path, convertedQueue));
     }
-
 
     private IEnumerator VisualizeTilesCoroutine(Stack<Vector3Int> path, Queue<Vector3Int> visitedTiles)
     {
@@ -111,6 +95,4 @@ public class AlgorithmVisualizer : MonoBehaviour
         StopAllCoroutines();
         Clear();
     }
-
-
 }

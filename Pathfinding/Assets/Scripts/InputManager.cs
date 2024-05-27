@@ -1,14 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
 
-public enum Algorithm { ASTAR, ASTAR_PARALLEL, DFS, BIDIRECTIONAL_ASTAR, DOTS_ASTAR}
+
+public enum Algorithm { ASTAR, DOTS_ASTAR, DFS, ASTAR_PARALLEL, BIDIRECTIONAL_ASTAR}
 
 public class InputManager : MonoBehaviour
 {
@@ -20,12 +17,16 @@ public class InputManager : MonoBehaviour
     private MapManager mapManager;
     private PlayerMovement playerMovement;
     private Camera cam;
+    private UserInterface userInterface;
+
+    public int runs = 50;
     void Start()
     {
         mapManager = FindObjectOfType<MapManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         cam = FindObjectOfType<Camera>();
         layer = LayerMask.GetMask("hit");
+        userInterface = FindObjectOfType<UserInterface>();
     }
 
     void Update()
@@ -64,23 +65,11 @@ public class InputManager : MonoBehaviour
 
             var playerPos = mapManager.tileMap.WorldToCell(playerMovement.transform.position);
             if (playerPos == clickPos) return;
+            if (!IsValidInput(playerPos, clickPos)) return;
+
             StartCoroutine(StartPathFinding(playerPos, clickPos));
         }
-
-
-        // show/hide algorithm visualizer
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            AlgorithmVisualizer.Instance.ShowHide();
-        }
-
-        // pause game
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameManager.PauseGame();
-        }
     }
-
 
     IEnumerator StartPathFinding(Vector3Int playerPos, Vector3Int clickPos)
     {
@@ -96,14 +85,24 @@ public class InputManager : MonoBehaviour
             Algorithm.DOTS_ASTAR => new DOTS_Astar(),
             _ => throw new Exception("Invalid algorithm")
         };
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
 
-        // calculate path
-        var path = algorithm.GetPath(playerPos, clickPos);
+        Stack<Vector3Int> path = null;
 
-        stopwatch.Stop();
-        UnityEngine.Debug.Log($"Time taken to calculate path: {stopwatch.Elapsed.TotalMilliseconds} milliseconds");
+        double averageTime = 0;
+        double minTime = double.MaxValue;
+        double maxTime = double.MinValue;
+
+        for(int i = 0; i < runs; i++)
+        {
+            // calculate path
+            path = algorithm.GetPath(playerPos, clickPos);
+
+            averageTime += algorithm.elapsedTime;
+            minTime = Math.Min(minTime, algorithm.elapsedTime);
+            maxTime = Math.Max(maxTime, algorithm.elapsedTime);
+        }
+
+        userInterface.SetStatistics(averageTime / runs, minTime, maxTime, algorithm.visitedTiles.Count, path?.Count ?? 0, path != null);
 
         if (path != null)
         {
@@ -122,9 +121,31 @@ public class InputManager : MonoBehaviour
         }
         else
         {
+            //visualize path (not found)
             yield return StartCoroutine(AlgorithmVisualizer.Instance.VisualizePath(null, algorithm.visitedTiles));
         }
+    }
 
-      
+    private bool IsValidInput(Vector3Int start, Vector3Int end)
+    {
+        if (MapManager.Map[start.x, start.y] == false)
+        {
+            UnityEngine.Debug.LogWarning("Invalid start position");
+            return false;
+        }
+
+        if (MapManager.Map[end.x, end.y] == false)
+        {
+            UnityEngine.Debug.LogWarning("Invalid end position");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public void SetRuns(string value)
+    {
+        runs = int.Parse(value);
     }
 }

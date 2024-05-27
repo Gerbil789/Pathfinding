@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Tilemaps;
+using System;
 
 public enum TileType {ROCK, GRASS}
 public enum SizeEnum
@@ -113,6 +114,11 @@ public class MapManager : MonoBehaviour
 
     public void SelectType(string type){
         currentTileType = (TileType)System.Enum.Parse( typeof(TileType), type);
+    }
+
+    public void SetTileType(Int32 type)
+    {
+        currentTileType = (TileType)type;
     }
 
     public void DrawMap(bool[,] map, Tilemap tilemap)

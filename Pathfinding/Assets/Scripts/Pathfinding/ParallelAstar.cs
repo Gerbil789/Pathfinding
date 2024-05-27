@@ -28,8 +28,6 @@ public class ParallelAstar : Pathfinding
     {
         try
         {
-            if (!IsValidInput(start, end)) return null;
-
             //initialize
             this.start = (Vector2Int)start;
             this.end = (Vector2Int)end;

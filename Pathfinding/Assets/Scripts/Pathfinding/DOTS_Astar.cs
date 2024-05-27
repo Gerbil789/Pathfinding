@@ -3,11 +3,10 @@ using UnityEngine;
 using System.Linq;
 using Unity.Collections;
 using Unity.Mathematics;
-using System.Runtime.CompilerServices;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using Unity.Jobs;
 using Unity.VisualScripting;
 using Unity.Burst;
+using System.Diagnostics;
 
 public class DOTS_Astar : Pathfinding
 {
@@ -28,49 +27,57 @@ public class DOTS_Astar : Pathfinding
         public int F;
 
         public void CalculateF() => F = G + H;
+
+        public bool isWalkable;
     }
-
-
-
-    private int2 gridSize = new int2(MapManager.MapSize.x, MapManager.MapSize.y);
-
-
 
 
     public override Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end)
     {
         visitedTiles = new(); //for visualization
-        if (!IsValidInput(start, end)) return null;
         path = null;
 
         NativeArray<Node> pathNodeArray = new NativeArray<Node>(MapManager.MapSize.x * MapManager.MapSize.y, Allocator.TempJob);
         NativeQueue<int2> visitedNodes = new NativeQueue<int2>(Allocator.TempJob);
 
         FindPathJob job = new FindPathJob();
+        job.startPosition = new int2(start.x, start.y);
+        job.endPosition = new int2(end.x, end.y);
+        job.mapSize = new int2(MapManager.MapSize.x, MapManager.MapSize.y);
 
         for (int x = 0; x < MapManager.MapSize.x; x++)
         {
             for (int y = 0; y < MapManager.MapSize.y; y++)
             {
-                if (!MapManager.Map[x, y]) continue; //skip unwalkable tiles
-
                 Node node = new();
                 node.x = x;
                 node.y = y;
                 node.index = job.CalculateIndex(x, y);
                 node.parentIndex = -1;
+
+                if (MapManager.Map[x, y])
+                {
+                    node.isWalkable = true;
+                }
+                else
+                {
+                    node.isWalkable = false;
+                }
+
                 node.G = int.MaxValue;
                 node.H = job.CalculateDistanceCost(new int2(x, y), new int2(end.x, end.y));
                 node.CalculateF();
+                
 
                 pathNodeArray[node.index] = node;
             }
         }
 
-        job.startPosition = new int2(start.x, start.y);
-        job.endPosition = new int2(end.x, end.y);
+      
         job.pathNodeArray = pathNodeArray;
         job.visitedNodes = visitedNodes;
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
 
         JobHandle handle = job.Schedule();
         handle.Complete();
@@ -80,6 +87,9 @@ public class DOTS_Astar : Pathfinding
         if (endNode.parentIndex != -1) {
             path = GeneratePath(job.pathNodeArray, endNode);
         }
+
+        stopwatch.Stop();
+        elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
 
         while (visitedNodes.Count > 0)
         {
@@ -101,6 +111,7 @@ public class DOTS_Astar : Pathfinding
 
         public NativeArray<Node> pathNodeArray;
         public NativeQueue<int2> visitedNodes;
+        public int2 mapSize;
 
 
         public void Execute()
@@ -132,7 +143,7 @@ public class DOTS_Astar : Pathfinding
 
         public int CalculateIndex(int x, int y)
         {
-            return x + y * MapManager.MapSize.x;
+            return x + y * mapSize.x;
         }
 
 
@@ -164,14 +175,7 @@ public class DOTS_Astar : Pathfinding
 
                 if (currentNodeIndex == endNodeIndex)
                 {
-                    //reached the end -> generate path and return
-                    //Node endNode = currentNode;
-                    //while (endNode.index != -1)
-                    //{
-                    //    visitedTiles.Enqueue(new Vector2Int(endNode.x, endNode.y));
-                    //    endNode = pathNodeArray[endNode.parentIndex];
-                    //}
-                    //path = new Stack<Vector3Int>(visitedTiles.Select(x => (Vector3Int)x));
+                    //reached the end
                     break;
                 }
 
@@ -192,12 +196,20 @@ public class DOTS_Astar : Pathfinding
                     int2 neighborPosition = new int2(currentNode.x + neighborOffset.x, currentNode.y + neighborOffset.y);
 
                     if(IsOutOfBounds(neighborPosition)) continue; //skip if out of bounds
-                    if (!MapManager.Map[neighborPosition.x, neighborPosition.y]) continue; //skip unwalkable tiles
 
                     int neighborNodeIndex = CalculateIndex(neighborPosition.x, neighborPosition.y);
+
+                    if (neighborNodeIndex < 0 || neighborNodeIndex >= pathNodeArray.Length)
+                    {
+                        continue;
+                    }
+
                     if (closedList.Contains(neighborNodeIndex)) continue; //skip if already in closed list
 
                     Node neighborNode = pathNodeArray[neighborNodeIndex];
+
+                    if(neighborNode.isWalkable == false) continue; //skip if not walkable (wall)
+
 
                     int2 currentNodePosition = new int2(currentNode.x, currentNode.y);
 
@@ -216,22 +228,10 @@ public class DOTS_Astar : Pathfinding
                         }
                     }
                 }
-
-
-
-
             }
 
             Node endNode = pathNodeArray[endNodeIndex];
             if (endNode.parentIndex == -1) return; //no path found
-
-
-
-
-
-
-
-
         }
 
         private int GetLowestCostFNodeIndex(NativeList<int> openList)
@@ -240,6 +240,7 @@ public class DOTS_Astar : Pathfinding
             for (int i = 1; i < openList.Length; i++)
             {
                 Node testNode = pathNodeArray[openList[i]];
+                if (testNode.isWalkable == false) continue;
                 if (testNode.F < lowestCostFNode.F)
                 {
                     lowestCostFNode = testNode;
@@ -250,10 +251,8 @@ public class DOTS_Astar : Pathfinding
 
         bool IsOutOfBounds(int2 pos)
         {
-            return pos.x < 0 || pos.y < 0 || pos.x >= MapManager.MapSize.x || pos.y >= MapManager.MapSize.y;
+            return pos.x < 0 || pos.y < 0 || pos.x >= mapSize.x || pos.y >= mapSize.y;
         }
-
-
     }
 
     Stack<Vector3Int> GeneratePath(NativeArray<Node> nodes, Node current)

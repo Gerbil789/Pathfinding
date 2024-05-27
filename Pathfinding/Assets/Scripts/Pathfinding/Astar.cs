@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Diagnostics;
 
 public class Astar : Pathfinding
 {
@@ -19,7 +20,6 @@ public class Astar : Pathfinding
     public override Stack<Vector3Int> GetPath(Vector3Int start, Vector3Int end) 
     {
         visitedTiles = new();
-        if (!IsValidInput(start, end)) return null;
 
         //initialize
         this.start = (Vector2Int)start;
@@ -30,7 +30,13 @@ public class Astar : Pathfinding
         allNodes = new();
 
         //run algorithm
+        Stopwatch stopwatch = new();
+        stopwatch.Start();
+
         Algorithm();
+
+        stopwatch.Stop();
+        elapsedTime = stopwatch.Elapsed.TotalMilliseconds;
         return path;
 
     }
@@ -61,7 +67,6 @@ public class Astar : Pathfinding
             if (current.position == end)
             {
                 path = GeneratePath(current);
-                //AlgorithmFinished?.Invoke(new Stack<Vector3Int>(path)); //copy path to avoid modifying the original
             }
         }
     }

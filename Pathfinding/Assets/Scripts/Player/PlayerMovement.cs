@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = new Vector3(MapManager.MapSize.x / 2, MapManager.MapSize.y / 2, 0);
         InputManager.PathCalculated += Move;
-
     }
 
     public void Move(Stack<Vector3Int> path)
@@ -26,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator MoveCoroutine(Stack<Vector3> path)
     {
-
         foreach (var tilePosition in path)
         {
             while (Vector3.Distance(transform.position, tilePosition) > 0.01f)
@@ -34,11 +32,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, tilePosition, Time.deltaTime * speed);
                 yield return null;
             }
-
             transform.position = tilePosition;
         }
-
-        //CombatManager.OnUnitTurnEnd?.Invoke(this);
-        //CombatManager.UnitIsMoving = false;
     }
 }
