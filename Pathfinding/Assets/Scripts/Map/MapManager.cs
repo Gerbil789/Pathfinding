@@ -13,7 +13,7 @@ public enum SizeEnum
 
 public enum MapType
 {
-    RANDOM,
+    NOISE,
     MAZE,
 }
 
@@ -30,7 +30,7 @@ public class MapManager : MonoBehaviour
     public static bool[,] Map;
 
     [SerializeField] SizeEnum mapSize = SizeEnum.Size_64x64;
-    [SerializeField] MapType mapType = MapType.RANDOM;
+    [SerializeField] MapType mapType = MapType.NOISE;
 
     public int seed = 0;
     public float scale = 16f;
@@ -42,6 +42,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] public Tilemap tileMap;
 
     [SerializeField] TileTypeToTile[] tiles;
+
 
     private void Awake()
     {
@@ -55,7 +56,7 @@ public class MapManager : MonoBehaviour
         MapSize = GetSize(mapSize);
         Map = mapType switch
         {
-            MapType.RANDOM => MapGenerator.GenerateNoise(MapSize.x, MapSize.y, MapSize.x / 64 * scale, amplitude, seed),
+            MapType.NOISE => MapGenerator.GenerateNoise(MapSize.x, MapSize.y, MapSize.x / 64 * scale, amplitude, seed),
             MapType.MAZE => MapGenerator.GenerateMaze(MapSize.x, MapSize.y, seed),
             _ => MapGenerator.GenerateNoise(MapSize.x, MapSize.y, scale, amplitude, seed)
         };
@@ -86,6 +87,16 @@ public class MapManager : MonoBehaviour
         mapType = (MapType)type;
     }
 
+    public void SetScale(string scale)
+    {
+        float.TryParse(scale, out this.scale);
+    }
+
+    public void SetAmplitude(string amplitude)
+    {
+        float.TryParse(amplitude, out this.amplitude);
+    }
+
     public void ClearMap()
     {
         tileMap.ClearAllTiles();
@@ -106,9 +117,9 @@ public class MapManager : MonoBehaviour
 
     public void DrawMap(bool[,] map, Tilemap tilemap)
     {
-        for (int x = 0; x < map.GetUpperBound(0); x++)
+        for (int x = 0; x <= map.GetUpperBound(0); x++)
         {
-            for (int y = 0; y < map.GetUpperBound(1); y++)
+            for (int y = 0; y <= map.GetUpperBound(1); y++)
             {
                 if (map[x, y])
                 {

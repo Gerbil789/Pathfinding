@@ -14,6 +14,7 @@ public class AlgorithmVisualizer : MonoBehaviour
     [SerializeField] private float visualizationDelay = 0.05f;
     [SerializeField] private float pathDelay = 0.05f;
 
+
     //public static event Action<Stack<Vector3Int>> VisualizationFinished;
 
     struct VisualizationData
@@ -110,4 +111,6 @@ public class AlgorithmVisualizer : MonoBehaviour
         StopAllCoroutines();
         Clear();
     }
+
+
 }

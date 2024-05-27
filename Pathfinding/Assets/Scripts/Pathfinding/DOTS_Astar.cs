@@ -46,13 +46,32 @@ public class DOTS_Astar : Pathfinding
         NativeArray<Node> pathNodeArray = new NativeArray<Node>(MapManager.MapSize.x * MapManager.MapSize.y, Allocator.TempJob);
         NativeQueue<int2> visitedNodes = new NativeQueue<int2>(Allocator.TempJob);
 
-        FindPathJob job = new FindPathJob
+        FindPathJob job = new FindPathJob();
+
+        for (int x = 0; x < MapManager.MapSize.x; x++)
         {
-            startPosition = new int2(start.x, start.y),
-            endPosition = new int2(end.x, end.y),
-            pathNodeArray = pathNodeArray,
-            visitedNodes = visitedNodes
-        };
+            for (int y = 0; y < MapManager.MapSize.y; y++)
+            {
+                if (!MapManager.Map[x, y]) continue; //skip unwalkable tiles
+
+                Node node = new();
+                node.x = x;
+                node.y = y;
+                node.index = job.CalculateIndex(x, y);
+                node.parentIndex = -1;
+                node.G = int.MaxValue;
+                node.H = job.CalculateDistanceCost(new int2(x, y), new int2(end.x, end.y));
+                node.CalculateF();
+
+                pathNodeArray[node.index] = node;
+            }
+        }
+
+        job.startPosition = new int2(start.x, start.y);
+        job.endPosition = new int2(end.x, end.y);
+        job.pathNodeArray = pathNodeArray;
+        job.visitedNodes = visitedNodes;
+
         JobHandle handle = job.Schedule();
         handle.Complete();
 
@@ -87,25 +106,6 @@ public class DOTS_Astar : Pathfinding
         public void Execute()
         {
             //initialize
-            for (int x = 0; x < MapManager.MapSize.x; x++)
-            {
-                for (int y = 0; y < MapManager.MapSize.y; y++)
-                {
-                    if (!MapManager.Map[x, y]) continue; //skip unwalkable tiles
-
-                    Node node = new();
-                    node.x = x;
-                    node.y = y;
-                    node.index = CalculateIndex(x, y);
-                    node.parentIndex = -1;
-                    node.G = int.MaxValue;
-                    node.H = CalculateDistanceCost(new int2(x, y), endPosition);
-                    node.CalculateF();
-
-                    pathNodeArray[node.index] = node;
-                }
-            }
-
             NativeArray<int2> neighborOffsetArray = new NativeArray<int2>(8, Allocator.Temp);
 
             neighborOffsetArray[0] = new int2(-1, 0); //left
@@ -136,7 +136,7 @@ public class DOTS_Astar : Pathfinding
         }
 
 
-        private int CalculateDistanceCost(int2 a, int2 b)
+        public int CalculateDistanceCost(int2 a, int2 b)
         {
             int x = math.abs(a.x - b.x);
             int y = math.abs(a.y - b.y);
