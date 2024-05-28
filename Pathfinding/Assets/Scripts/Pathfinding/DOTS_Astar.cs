@@ -7,6 +7,7 @@ using Unity.Jobs;
 using Unity.VisualScripting;
 using Unity.Burst;
 using System.Diagnostics;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class DOTS_Astar : Pathfinding
 {
@@ -149,10 +150,7 @@ public class DOTS_Astar : Pathfinding
 
         public int CalculateDistanceCost(int2 a, int2 b)
         {
-            int x = math.abs(a.x - b.x);
-            int y = math.abs(a.y - b.y);
-            int remaining = math.abs(x - y);
-            return MOVE_DIAGONAL_COST * math.min(x, y) + MOVE_STRAIGHT_COST * remaining;
+            return ((math.abs((a.x - b.x)) + (math.abs(a.y - b.y))) * 10);
         }
 
 

@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
         {
             strategyDropdown.options.Clear();
 
-            List<Algorithm> algorithms = new List<Algorithm>() { Algorithm.ASTAR, Algorithm.DOTS_ASTAR, Algorithm.DFS };
+            List<Algorithm> algorithms = new List<Algorithm>() { Algorithm.ASTAR, Algorithm.DOTS_ASTAR, Algorithm.DFS};
 
             foreach (var value in algorithms)
             {
