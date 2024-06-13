@@ -1,6 +1,6 @@
 # Pathfinding algorithms on 2D grid
 
-You can run the app in browser on this url: https://www.gerbil.cz/pathfinding
+You can run the app in browser on this url: https://www.gerbil.cz/projects/pathfinding
 
 Advantage of Unity DOTS is not apparent in browser, because of browser limitations.
 If you want to experience fuff DOTS power, download desktop app or build it yourself
